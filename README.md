@@ -1,2 +1,2 @@
-# React Date Range Picker 🗓
+# Date Range Picker 🗓
 
