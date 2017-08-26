@@ -3,7 +3,6 @@ import { css } from 'glamor';
 
 import Day from './Day';
 
-const currentDate = new Date();
 const daysOfWeek = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
 const monthsLong = [
   'January',
@@ -27,6 +26,7 @@ const flexRow = css({
 
 const dayStyles = css({
   width: 'calc(100%/7)',
+  textAlign: 'center',
 });
 
 const monthStyles = css({
@@ -40,6 +40,8 @@ class Calendar extends Component {
     this.state = {
       currentDate: null,
     };
+
+    this.handleDateSelect = this.handleDateSelect.bind(this);
   }
 
   componentDidMount() {
@@ -59,7 +61,7 @@ class Calendar extends Component {
   getDayStyles(day) {
     const { year, month } = this.props;
     const date = new Date(year, month, day);
-    return day == 1 ? { marginLeft: `calc((100%/7) * ${date.getDay()})` } : { marginLeft: '0px' };
+    return day === 1 ? { marginLeft: `calc((100%/7) * ${date.getDay()})` } : { marginLeft: '0px' };
   }
 
   daysInThisMonth(year, month) {
@@ -67,24 +69,34 @@ class Calendar extends Component {
     return d.getDate();
   }
 
-  handleDateSelect() {}
+  handleDateSelect(year, month, day) {
+    this.props.handleDateSelect(year, month, day);
+  }
 
   render() {
+    const { year, month } = this.props;
     return (
-      <div className="calendar">
-        <div className="month-name">
-          {monthsLong[this.props.month]}
+      <div className="calendar" style={{ width: '48%' }}>
+        <div className="month-name" style={{ textAlign: 'center' }}>
+          {monthsLong[this.props.month]} {this.props.year}
         </div>
         <div className="weekdays" {...flexRow}>
           {daysOfWeek.map((day, i) =>
-            (<div key={`${day}-${i}`} className="week-day" style={{ width: 'calc( 100%/7 )' }}>
+            (<div key={`${day}-${i}`} className="week-day" {...dayStyles}>
               {day}
             </div>),
           )}
         </div>
         <div className="month" {...flexRow} {...monthStyles}>
           {this.getDays().map((day, i) =>
-            <Day key={day} day={day} styles={this.getDayStyles(day)} />,
+            (<Day
+              key={day}
+              day={day}
+              styles={this.getDayStyles(day)}
+              onDaySelect={() => {
+                this.handleDateSelect(year, month, day);
+              }}
+            />),
           )}
         </div>
       </div>
