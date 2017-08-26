@@ -4,6 +4,8 @@ import Calendar from './Calendar';
 
 const now = new Date();
 
+// TODO: Display Start and End Date
+
 class DateRangePicker extends Component {
   constructor() {
     super();
@@ -20,7 +22,6 @@ class DateRangePicker extends Component {
     this.setDate = this.setDate.bind(this);
   }
 
-  // Todo: do this differently ?
   setDate(year, month, day) {
     const { startDate } = this.state;
     const newState = {};
