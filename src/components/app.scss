@@ -1,0 +1,10 @@
+@import "../global-styles/base";
+
+body,
+.wrap {
+  width: 100%;
+  margin: 0 auto;
+  .main {
+    padding: 5px 20px;
+  }
+}

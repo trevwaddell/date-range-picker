@@ -1,0 +1,11 @@
+
+# Dependencies
+node_modules
+package-lock.json
+
+#Logs
+npm-debug.log
+*.log
+
+# Bundled Files
+public
