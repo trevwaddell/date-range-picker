@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import Calendar from './Calendar';
+import Calendar from '../Calendar/Calendar';
 
 const now = new Date();
 
@@ -20,6 +20,7 @@ class DateRangePicker extends Component {
     };
 
     this.setDate = this.setDate.bind(this);
+    this.getDateString = this.getDateString.bind(this);
   }
 
   setDate(year, month, day) {
@@ -37,6 +38,10 @@ class DateRangePicker extends Component {
       newState.startDate = date;
     }
     this.setState(newState);
+  }
+
+  getDateString(date) {
+    return new Date(date).toLocaleDateString();
   }
 
   changeMonth(delta) {
@@ -58,9 +63,13 @@ class DateRangePicker extends Component {
   }
 
   render() {
-    const { year, month } = this.state;
+    const { year, month, startDate, endDate } = this.state;
     return (
-      <div>
+      <div className="date-range-picker">
+        <div className="dates-display">
+          {startDate ? this.getDateString(startDate) : 'Start Date'} &rarr;
+          {endDate ? this.getDateString(endDate) : 'End Date'}
+        </div>
         <button
           onClick={() => {
             this.changeMonth(-1);

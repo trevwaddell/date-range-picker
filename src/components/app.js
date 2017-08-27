@@ -2,6 +2,7 @@
 import React from 'react';
 
 import DateRangePicker from './DateRangePicker/DateRangePicker';
+// import SingleDatePicker from './SingleDatePicker/SingleDatePicker';
 
 const App = () =>
   (<div className="wrap">
