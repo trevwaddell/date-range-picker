@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import { css } from 'glamor';
 
@@ -10,6 +11,22 @@ const dayStyles = css({
   textAlign: 'center',
 });
 
+const propTypes = {
+  year: PropTypes.number,
+  month: PropTypes.number,
+  day: PropTypes.number,
+  onDaySelect: PropTypes.func,
+  styles: PropTypes.objectOf(PropTypes.string),
+};
+
+const defaultProps = {
+  year: new Date().getFullYear(),
+  month: new Date().getMonth(),
+  day: new Date().getDate(),
+  onDaySelect() {},
+  styles: {},
+};
+
 class Day extends Component {
   constructor(props) {
     super(props);
@@ -18,10 +35,6 @@ class Day extends Component {
 
     this.getDate = this.getDate.bind(this);
     this.isToday = this.isToday.bind(this);
-  }
-
-  componentDidMount() {
-    console.log(this.isToday());
   }
 
   getDate() {
@@ -46,5 +59,8 @@ class Day extends Component {
     );
   }
 }
+
+Day.propTypes = propTypes;
+Day.defaultProps = defaultProps;
 
 export default Day;

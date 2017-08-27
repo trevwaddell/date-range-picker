@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { css } from 'glamor';
 
 import Day from './Day';
 
+// TODO: Move to Constants file
 const daysOfWeek = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
 const monthsLong = [
   'January',
@@ -33,12 +35,26 @@ const monthStyles = css({
   flexWrap: 'wrap',
 });
 
+const propTypes = {
+  year: PropTypes.number,
+  month: PropTypes.number,
+  selectedDates: PropTypes.objectOf(PropTypes.date),
+  handleDateSelect: PropTypes.func,
+};
+
+const defaultProps = {
+  year: new Date().getFullYear(),
+  month: new Date().getMonth(),
+  selectedDates: {},
+  handleDateSelect() {},
+};
+
 class Calendar extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      currentDate: null,
+      hoveredDate: null,
     };
 
     this.handleDateSelect = this.handleDateSelect.bind(this);
@@ -106,5 +122,8 @@ class Calendar extends Component {
     );
   }
 }
+
+Calendar.propTypes = propTypes;
+Calendar.defaultProps = defaultProps;
 
 export default Calendar;
