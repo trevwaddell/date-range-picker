@@ -21,6 +21,7 @@ const monthsLong = [
   'December',
 ];
 
+// TODO: use external css, maybe styled-jsx
 const flexRow = css({
   display: 'flex',
   flexDirection: 'row',
