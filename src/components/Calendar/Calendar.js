@@ -74,9 +74,9 @@ class Calendar extends Component {
   }
 
   render() {
-    const { year, month } = this.props;
+    const { year, month, selectedDates } = this.props;
     return (
-      <div className="calendar" style={{ width: '48%' }}>
+      <div className="calendar" style={{ width: '48%', border: '1px solid' }}>
         <div className="month-name" style={{ textAlign: 'center' }}>
           {monthsLong[this.props.month]} {this.props.year}
         </div>
@@ -92,7 +92,10 @@ class Calendar extends Component {
             (<Day
               key={day}
               day={day}
+              month={month}
+              year={year}
               styles={this.getDayStyles(day)}
+              selectedDates={this.props.selectedDates}
               onDaySelect={() => {
                 this.handleDateSelect(year, month, day);
               }}
